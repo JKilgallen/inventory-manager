@@ -4,15 +4,24 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 
 st.set_page_config(
-    page_title="First Aid Inventory Tracker",
+    page_title="First-Aid Inventory Tracker",
     page_icon="🩹"
 )
 
-st.write("# Welcome to the First Aid Inventory Tracker! 🩹")
+st.write("# First-Aid Inventory Tracker 🩹")
 
 st.markdown(
     f"""
-    This web app is a simple inventory tracker for tracking and updating the contents of first aid supplies for the Fethard On-Sea unit of the Irish Coast Guard.
+    This website is a simple web app for tracking and updating first-aid supplied for the Fethard On-Sea unit of the Irish Coast Guard.
+
+    The supplies are organized based on the where they're stored, specifically:
+    - **📦 Stockroom**: The main storage area for all supplies.
+    - **🎒 Training Kit**: The supplies in the training kit used when on exercises.
+    - **🚨 Mobile 1/2**: The supplies in the first-aid bag assigned to Mobile 1/2.
+
+    The tracker needs to be updated whenever supplies are used or restocked. When an item has been used, select the appropriate inventory, locate the item, and update the count accordingly. When restocking an item, you will need to update the count, and the expiration date. Once you've made your changes, click the "Sync" button to update the inventory.
+
+    The tracker will automatically flag items that are expiring or running low in any of the inventories. To receive automated email alerts about items that need attention, please add your email address to your account and enable alerts on the user settings page.
     """
 )
 
