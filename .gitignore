@@ -1,0 +1,5 @@
+resources/
+
+.streamlt/secrets.toml
+
+Pipfile.lock
