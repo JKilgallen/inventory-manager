@@ -19,9 +19,15 @@ st.markdown(
     - **🎒 Training Kit**: The supplies in the training kit used when on exercises.
     - **🚨 Mobile 1/2**: The supplies in the first-aid bag assigned to Mobile 1/2.
 
-    The tracker needs to be updated whenever supplies are used or restocked. When an item has been used, select the appropriate inventory, locate the item, and update the count accordingly. When restocking an item, you will need to update the count, and the expiration date. Once you've made your changes, click the "Sync" button to update the inventory.
+    The tracker needs to be updated whenever supplies are *used* or *restocked*. To do this, you will need to:
 
-    The tracker will automatically flag items that are expiring or running low in any of the inventories. To receive automated email alerts about items that need attention, please add your email address to your account and enable alerts on the user settings page.
+    1. Select the appropriate inventory.
+    2. Locate the item.
+    3. Update the count.
+    4. Update the expiration date (if restocking an item).
+    5. Click the "Sync" button to upload the changes.
+    
+    Updating both the count and expiration date is important as this way the tracker can send out automated alerts when items are running low or expiring soon. To receive automated email alerts about items that need attention, please add your email address to your account and enable alerts on the user settings page.
     """
 )
 
@@ -108,8 +114,7 @@ if not medium_priority_items.empty:
 
 st.markdown("""
             ## Manage Inventory
-
-            To update an item, select the value you wish to change and enter the new value, then click the "Sync" button to upload the changes.
+            Use the table below to update the count and expiration date of items in the inventories. Remember to click the "Sync" button afterwards to upload your changes.
             """)
 
 active_inventory = st.selectbox("Select which inventory to manage:", inventory_options)
