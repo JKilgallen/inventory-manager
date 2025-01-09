@@ -11,23 +11,21 @@ st.set_page_config(
 st.write("# First-Aid Inventory Tracker 🩹")
 
 st.markdown(
-    f"""
+    r"""
     This website is a simple web app for tracking and updating first-aid supplied for the Fethard On-Sea unit of the Irish Coast Guard.
 
-    The supplies are organized based on the where they're stored, specifically:
-    - **📦 Stockroom**: The main storage area for all supplies.
-    - **🎒 Training Kit**: The supplies in the training kit used when on exercises.
-    - **🚨 Mobile 1/2**: The supplies in the first-aid bag assigned to Mobile 1/2.
+    The webapp has three main sections:
+    - ⚠️ **Alerts**: This section displays alerts for supplies that need, or will soon need attention due to low stock or expiration.
+    - 🗘 **Inventory Tracker**: This is where you can update which supplies have been used or restocked.
+    - 🔍 **Inventory Viewer**: This is where you can view the current supplies in each inventory.
 
-    The tracker needs to be updated whenever supplies are *used* or *restocked*. To do this, you will need to:
+    The supplies are organized into inventories, based on where they are stored:
 
-    1. Select the appropriate inventory.
-    2. Locate the item.
-    3. Update the count.
-    4. Update the expiration date (if restocking an item).
-    5. Click the "Sync" button to upload the changes.
+    - 📦 **Stockroom**: The main storage area for all supplies.
+    - 🎒 **Training Kit**: The supplies in the training kit used when on exercises.
+    - 🚨 **Mobile 1/2**: The supplies in the first-aid bag assigned to Mobile 1/2.
     
-    Updating both the count and expiration date is important as this way the tracker can send out automated alerts when items are running low or expiring soon. To receive automated email alerts about items that need attention, please add your email address to your account and enable alerts on the user settings page.
+    To receive automated email alerts about items that need attention, please add your email address to your account and enable alerts on the user settings page.
     """
 )
 
@@ -45,7 +43,7 @@ def update_status(df):
     return df
 
 def process_inventory(df):
-
+    print(df.keys())
     df["Expiration Date"] = pd.to_datetime(df["Expiration Date"], errors="coerce")
     df["Last Updated"] = pd.to_datetime(df["Last Updated"], errors="coerce")
     df["Count"] = df["Count"].astype(int)
@@ -111,10 +109,25 @@ if not medium_priority_items.empty:
                     column_order=column_order,
                     hide_index=True)
 
+st.markdown(r"""
+            ## 📋 Update Inventory
+            The tracker needs to be updated whenever supplies are *used* or *restocked*. To do this, you will need to:
+
+                1. Select the appropriate inventory.
+                2. Select the item you want to update.
+                2. Select if you are removing or restocking an item.
+                3. Enter the quantity of the item that was removed or restocked.
+                4. Enter the expiration date of the item that was removed$^*$ or restocked.
+                5. Click the "Sync" button to upload the changes.
+                
+                Updating both the count and expiration date is important as this way the tracker can send out automated alerts when items are running low or expiring soon.
+
+                *If you don't know the expiration date of the item that was removed, you can leave it blank, and the tracker will assume it is the newest item in stock.
+            """)
 
 st.markdown("""
-            ## Manage Inventory
-            Use the table below to update the count and expiration date of items in the inventories. Remember to click the "Sync" button afterwards to upload your changes.
+            ## View Inventory
+            Use the table below to view the current first-aid supplies by inventory. A spreadsheet of the inventory can be downloaded by hovering over the table and clicking the download button.
             """)
 
 active_inventory = st.selectbox("Select which inventory to manage:", inventory_options)
